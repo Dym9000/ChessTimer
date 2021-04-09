@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="timeMode"
+            type="com.example.chesstimer.timeModesDatabase.TimeMode" />
+        <variable
+            name="player1"
+            type="Integer" />
+        <variable
+            name="player2"
+            type="Integer" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/colorSurface">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/player_1_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_double"
+                android:layout_marginRight="@dimen/margin_double"
+                app:playerNumber="@{player1}"
+                app:timeMode="@{timeMode}"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                tools:text="player1" />
+
+            <TextView
+                android:id="@+id/player_2_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_double"
+                android:layout_marginLeft="@dimen/margin_double"
+                app:playerNumber="@{player2}"
+                app:timeMode="@{timeMode}"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                tools:text="player2" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

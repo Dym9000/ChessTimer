@@ -2,4 +2,10 @@
 <resources>
     <dimen name="padding_normal">8dp</dimen>
     <dimen name="margin_double">16dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>
+    <dimen name="title_size">40sp</dimen>
+    <dimen name="subtitle_size">24sp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="time_picker_digit_size">70sp</dimen>
+    <dimen name="corner_radius">6dp</dimen>
 </resources>

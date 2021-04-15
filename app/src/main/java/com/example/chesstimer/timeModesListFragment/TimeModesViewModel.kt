@@ -1,8 +1,8 @@
-package com.example.chesstimer.timeModes
+package com.example.chesstimer.timeModesListFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.chesstimer.timeModesDatabase.TimeMode
+import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -10,6 +10,6 @@ import javax.inject.Inject
 class TimeModesViewModel @Inject constructor(private val repository: TimeModesRepository)
     :ViewModel() {
 
-    val timeModes:LiveData<List<TimeMode>> = repository.loadTimeModes()
+    val timeModes:LiveData<List<TimeModeWithPlayers>> = repository.loadTimeModes()
 
 }

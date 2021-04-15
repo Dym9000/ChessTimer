@@ -3,11 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/titleFragment">
+    app:startDestination="@id/timeModesFragment">
 
     <fragment
-        android:id="@+id/titleFragment"
-        android:name="com.example.chesstimer.timeModes.TimeModesFragment"
+        android:id="@+id/timeModesFragment"
+        android:name="com.example.chesstimer.timeModesListFragment.TimeModesFragment"
         android:label="TitleFragment"
-        tools:layout="@layout/fragment_time_modes"/>
+        tools:layout="@layout/fragment_time_modes">
+        <action
+            android:id="@+id/action_timeModesFragment_to_addingTimeMode"
+            app:destination="@id/addingTimeMode" />
+    </fragment>
+    <fragment
+        android:id="@+id/addingTimeMode"
+        android:name="com.example.chesstimer.addingNewTimeModeFragment.AddingTimeModeFragment"
+        android:label="fragment_adding_time_mode"
+        tools:layout="@layout/fragment_adding_time_mode" >
+        <action
+            android:id="@+id/action_addingTimeMode_to_timeModesFragment"
+            app:destination="@id/timeModesFragment" />
+    </fragment>
 </navigation>

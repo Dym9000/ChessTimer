@@ -4,7 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class TimeMode(
+data class Player (
     @PrimaryKey(autoGenerate = true)
-    val modeId: Int = 0
-    )
+    val id: Long = 0,
+    val timeModeId: Long,
+    val timeInSeconds:Long
+    ) {
+}

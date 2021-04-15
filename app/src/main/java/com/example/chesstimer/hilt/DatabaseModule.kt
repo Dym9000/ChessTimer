@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object TimeModesDatabaseSingletonModule {
+object DatabaseModule {
 
     @Singleton
     @Provides
@@ -32,4 +32,5 @@ object TimeModesDatabaseSingletonModule {
     fun provideTimeModesDao(database: TimeModesDatabase): TimeModesDAO {
         return database.timeModesDao
     }
+
 }

@@ -2,22 +2,39 @@ package com.example.chesstimer.timeModesDatabase
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
-interface TimeModesDAO {
+abstract class TimeModesDAO {
+
+    private suspend fun createAndInsertPlayers(id:Long, times: List<Long>){
+        val players = mutableListOf<Player>()
+        for(time in times){
+            players.add(Player(timeModeId = id, timeInSeconds = time))
+        }
+        insertPlayers(players)
+    }
 
     @Insert
-    suspend fun insert(timeMode: TimeMode)
+    abstract suspend fun insertTimeMode(timeMode: TimeMode):Long
 
-    @Delete
-    suspend fun delete(timeMode: TimeMode)
+    @Insert
+    abstract suspend fun insertPlayers(players:List<Player>)
+//    @Delete
+//    suspend fun delete(timeMode: TimeMode)
+//
+//    @Query("DELETE FROM TimeMode")
+//    suspend fun clear()
 
-    @Query("DELETE FROM time_modes_table")
-    suspend fun clear()
+    @Transaction
+    open suspend fun insertAll(times: List<Long>){
+        val id = insertTimeMode(timeMode=TimeMode())
+        createAndInsertPlayers(id, times)
+    }
 
-    @Query("SELECT * FROM time_modes_table ORDER BY modeId ASC")
-    fun getAllTimeModes():LiveData<List<TimeMode>>
+    @Transaction
+    @Query("SELECT * FROM TimeMode")
+    abstract fun getAllTimeModes():LiveData<List<TimeModeWithPlayers>>
 }

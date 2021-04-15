@@ -1,16 +1,16 @@
-package com.example.chesstimer.timeModes
+package com.example.chesstimer.timeModesListFragment
 
 import androidx.lifecycle.LiveData
-import com.example.chesstimer.timeModesDatabase.TimeMode
+import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
 import com.example.chesstimer.timeModesDatabase.TimeModesDAO
 
 class TimeModesRepository (private val timeModesDao: TimeModesDAO) {
 
-//    fun insertTimeMode(timeMode:TimeMode){
-//        timeModesDao.insert(timeMode)
-//    }
+    suspend fun insertTimeModesAndPlayers(times:List<Long>){
+        timeModesDao.insertAll(times)
+    }
 
-    fun loadTimeModes():LiveData<List<TimeMode>>{
+    fun loadTimeModes():LiveData<List<TimeModeWithPlayers>>{
         return timeModesDao.getAllTimeModes()
     }
 

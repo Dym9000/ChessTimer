@@ -1,7 +1,7 @@
 package com.example.chesstimer.hilt
 
-import com.example.chesstimer.timeModes.TimeModesRepository
 import com.example.chesstimer.timeModesDatabase.TimeModesDAO
+import com.example.chesstimer.timeModesListFragment.TimeModesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TimeModesRepositoryModule{
+object RepositoryModule{
 
     @Provides
     @Singleton

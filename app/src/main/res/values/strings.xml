@@ -2,4 +2,16 @@
     <string name="app_name">ChessTimer</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_time_mode_description">Add a new time mode button</string>
+    <string name="colon">:</string>
+    <string name="player_1_title">Player 1</string>
+    <string name="player_2_title">Player 2</string>
+    <string name="player_2_settings_btn">Set Player 2</string>
+    <string name="save_settings_btn">Save mode</string>
+    <string name="subtracting_seconds">Subtracting seconds</string>
+    <string name="subtracting_minutes">Subtracting minutes</string>
+    <string name="subtracting_hours">Subtracting hours</string>
+    <string name="adding_seconds">Adding seconds</string>
+    <string name="adding_minutes">Adding minutes</string>
+    <string name="adding_hours">Adding hours</string>
+
 </resources>

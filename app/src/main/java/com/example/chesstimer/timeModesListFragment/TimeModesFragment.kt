@@ -1,4 +1,4 @@
-package com.example.chesstimer.timeModes
+package com.example.chesstimer.timeModesListFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chesstimer.R
 import com.example.chesstimer.databinding.FragmentTimeModesBinding
@@ -27,9 +28,7 @@ class TimeModesFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentTimeModesBinding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_time_modes, container, false)
-
         binding.lifecycleOwner = this
-        binding.viewModel = timeModesViewModel
 
         binding.timeModes.adapter = adapter
 
@@ -41,6 +40,12 @@ class TimeModesFragment : Fragment() {
 
         val manager = LinearLayoutManager(activity)
         binding.timeModes.layoutManager = manager
+
+        binding.addTimeMode.setOnClickListener {view: View ->
+            view.findNavController().navigate(TimeModesFragmentDirections.actionTimeModesFragmentToAddingTimeMode())
+        }
+
+
         return binding.root
     }
 

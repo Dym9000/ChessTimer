@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="timeMode"
-            type="com.example.chesstimer.timeModesDatabase.TimeMode" />
-        <variable
-            name="player1"
-            type="Integer" />
-        <variable
-            name="player2"
-            type="Integer" />
+            name="item"
+            type="com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers" />
     </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="?attr/colorSurface">
+        android:layout_margin="@dimen/margin_normal"
+        android:padding="@dimen/padding_normal"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="@dimen/corner_radius">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/player_1_time"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_double"
-                android:layout_marginRight="@dimen/margin_double"
-                app:playerNumber="@{player1}"
-                app:timeMode="@{timeMode}"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                tools:text="player1" />
+                android:text="@string/player_1_title"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/player_2_time"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_double"
-                android:layout_marginLeft="@dimen/margin_double"
-                app:playerNumber="@{player2}"
-                app:timeMode="@{timeMode}"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                tools:text="player2" />
-        </LinearLayout>
+                android:text="@string/player_2_title"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="@+id/time_mode_player1_textView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/time_mode_player1_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:timeMode="@{item}"
+                tools:text="00:00:00     00:00:00" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </layout>

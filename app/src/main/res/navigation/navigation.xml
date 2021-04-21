@@ -7,20 +7,32 @@
 
     <fragment
         android:id="@+id/timeModesFragment"
-        android:name="com.example.chesstimer.timeModesListFragment.TimeModesFragment"
+        android:name="com.example.chesstimer.displayTimeModesFragment.TimeModesFragment"
         android:label="TitleFragment"
         tools:layout="@layout/fragment_time_modes">
         <action
             android:id="@+id/action_timeModesFragment_to_addingTimeMode"
             app:destination="@id/addingTimeMode" />
+        <action
+            android:id="@+id/action_timeModesFragment_to_gameplayFragment"
+            app:destination="@id/gameplayFragment" />
     </fragment>
     <fragment
         android:id="@+id/addingTimeMode"
-        android:name="com.example.chesstimer.addingNewTimeModeFragment.AddingTimeModeFragment"
+        android:name="com.example.chesstimer.addingNewTimeModeFragment.AddTimeModeFragment"
         android:label="fragment_adding_time_mode"
-        tools:layout="@layout/fragment_adding_time_mode" >
+        tools:layout="@layout/fragment_adding_time_mode">
         <action
             android:id="@+id/action_addingTimeMode_to_timeModesFragment"
             app:destination="@id/timeModesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameplayFragment"
+        android:name="com.example.chesstimer.gameplayFragment.GameplayFragment"
+        android:label="fragment_gameplay"
+        tools:layout="@layout/fragment_gameplay">
+        <argument
+            android:name="timeModeId"
+            app:argType="integer" />
     </fragment>
 </navigation>

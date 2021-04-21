@@ -13,5 +13,7 @@
     <string name="adding_seconds">Adding seconds</string>
     <string name="adding_minutes">Adding minutes</string>
     <string name="adding_hours">Adding hours</string>
+    <string name="swap_times_button">Swap times</string>
+    <string name="start_game_button">START</string>
 
 </resources>

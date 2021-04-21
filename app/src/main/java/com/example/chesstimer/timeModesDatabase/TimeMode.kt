@@ -7,4 +7,4 @@ import androidx.room.PrimaryKey
 data class TimeMode(
     @PrimaryKey(autoGenerate = true)
     val modeId: Int = 0
-    )
+)

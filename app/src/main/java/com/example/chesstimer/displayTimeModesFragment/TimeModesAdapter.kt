@@ -1,4 +1,4 @@
-package com.example.chesstimer.timeModesListFragment
+package com.example.chesstimer.displayTimeModesFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,27 +6,27 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimer.databinding.ListTimeModesItemBinding
+import com.example.chesstimer.timeModesDatabase.TimeMode
 import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
-import dagger.hilt.android.scopes.FragmentScoped
-import javax.inject.Inject
 
-@FragmentScoped
-class TimeModesAdapter@Inject constructor()
-    : ListAdapter<TimeModeWithPlayers,TimeModesAdapter.TimeModeViewHolder>(TimeModeDiffCallback()) {
+class TimeModesAdapter(val clickListener: OnTimeModeClickListener) :
+    ListAdapter<TimeModeWithPlayers, TimeModesAdapter.TimeModeViewHolder>(TimeModeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeModeViewHolder {
         return TimeModeViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: TimeModeViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     class TimeModeViewHolder private constructor(val binding: ListTimeModesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: TimeModeWithPlayers) {
+        fun bind(item: TimeModeWithPlayers, clickListener: OnTimeModeClickListener) {
+            binding.clickListener = clickListener
             binding.item = item
+            binding.itemTime = item.singleTimeMode
             binding.executePendingBindings()
         }
 
@@ -40,7 +40,7 @@ class TimeModesAdapter@Inject constructor()
     }
 }
 
-class TimeModeDiffCallback: DiffUtil.ItemCallback<TimeModeWithPlayers>(){
+class TimeModeDiffCallback : DiffUtil.ItemCallback<TimeModeWithPlayers>() {
     override fun areItemsTheSame(
         oldItem: TimeModeWithPlayers,
         newItem: TimeModeWithPlayers
@@ -52,6 +52,11 @@ class TimeModeDiffCallback: DiffUtil.ItemCallback<TimeModeWithPlayers>(){
         oldItem: TimeModeWithPlayers,
         newItem: TimeModeWithPlayers
     ): Boolean {
-        return oldItem.players == oldItem.players
+        return oldItem.players == newItem.players
     }
+}
+
+class OnTimeModeClickListener(val clickListener: (timeMode: TimeMode) -> Unit) {
+    fun onClick(timeModeWithPlayers: TimeModeWithPlayers) =
+        clickListener(timeModeWithPlayers.singleTimeMode)
 }

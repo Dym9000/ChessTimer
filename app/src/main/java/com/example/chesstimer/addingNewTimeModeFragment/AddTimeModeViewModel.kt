@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.chesstimer.timeModesListFragment.TimeModesRepository
+import com.example.chesstimer.displayTimeModesFragment.TimeModesRepository
 import com.example.chesstimer.utils.TimeConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddTimeModeViewModel @Inject constructor(
     private val repository: TimeModesRepository,
-    private val converter: TimeConverter,
+    private val converter: TimeConverter
 ) : ViewModel() {
 
     private val minValue = 0
@@ -27,8 +27,8 @@ class AddTimeModeViewModel @Inject constructor(
     private var secondPlayerTimeInSeconds: Long = 0
 
     private var _currentTimeInSeconds = MutableLiveData<Long>()
-    val currentTimeInSeconds:LiveData<Long>
-        get(){
+    val currentTimeInSeconds: LiveData<Long>
+        get() {
             return _currentTimeInSeconds
         }
 
@@ -98,7 +98,8 @@ class AddTimeModeViewModel @Inject constructor(
         } else {
             _varName.value = max
         }
-        _currentTimeInSeconds.value = converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
+        _currentTimeInSeconds.value =
+            converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
     }
 
     private fun add(
@@ -112,7 +113,8 @@ class AddTimeModeViewModel @Inject constructor(
         } else {
             _varName.value = minValue
         }
-        _currentTimeInSeconds.value = converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
+        _currentTimeInSeconds.value =
+            converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
     }
 
     fun onNextPlayerClick() {

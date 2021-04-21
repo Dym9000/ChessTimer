@@ -8,12 +8,21 @@
         <variable
             name="item"
             type="com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers" />
+
+        <variable
+            name="clickListener"
+            type="com.example.chesstimer.displayTimeModesFragment.OnTimeModeClickListener" />
+
+        <variable
+            name="itemTime"
+            type="com.example.chesstimer.timeModesDatabase.TimeMode" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_normal"
+        android:onClick="@{() -> clickListener.onClick(item)}"
         android:padding="@dimen/padding_normal"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/corner_radius">
@@ -28,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/player_1_title"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/player_2_title"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintEnd_toEndOf="@+id/time_mode_player1_textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:timeMode="@{item}"

@@ -12,18 +12,13 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelScopeModules {
 
     @Provides
-    fun provideTimeConverter():TimeConverter{
+    fun provideTimeConverter(): TimeConverter {
         return TimeConverter()
     }
 
     @Provides
-    fun provideTimeMode(): TimeMode{
+    fun provideTimeMode(): TimeMode {
         return TimeMode()
     }
-
-//    @Provides
-//    fun providePlayer(): Player{
-//        return Player()
-//    }
 
 }

@@ -15,11 +15,11 @@ import java.util.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AddingTimeModeFragment.newInstance] factory method to
+ * Use the [AddTimeModeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class AddingTimeModeFragment : Fragment() {
+class AddTimeModeFragment : Fragment() {
 
     val viewModel: AddTimeModeViewModel by viewModels()
 
@@ -32,9 +32,10 @@ class AddingTimeModeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
-        viewModel.navigatedToSecondPlayer.observe(viewLifecycleOwner,{navigated ->
-            if(navigated == false){
-                binding.root.findNavController().navigate(R.id.action_addingTimeMode_to_timeModesFragment)
+        viewModel.navigatedToSecondPlayer.observe(viewLifecycleOwner, { navigated ->
+            if (navigated == false) {
+                binding.root.findNavController()
+                    .navigate(R.id.action_addingTimeMode_to_timeModesFragment)
             }
         })
         return binding.root

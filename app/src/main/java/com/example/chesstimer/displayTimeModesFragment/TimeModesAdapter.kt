@@ -8,9 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimer.databinding.ListTimeModesItemBinding
 import com.example.chesstimer.timeModesDatabase.TimeMode
 import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
+import java.util.*
 
 class TimeModesAdapter(val clickListener: OnTimeModeClickListener) :
     ListAdapter<TimeModeWithPlayers, TimeModesAdapter.TimeModeViewHolder>(TimeModeDiffCallback()) {
+
+    fun getItemAtPosition(position: Int): TimeModeWithPlayers {
+        return getItem(position)
+    }
+
+    fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        val dataList = currentList
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until (toPosition - 1) step 1) {
+                Collections.swap(currentList, i, i + 1)
+            }
+        } else {
+            for (i in toPosition until (fromPosition - 1) step 1) {
+                Collections.swap(currentList, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+        return true
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeModeViewHolder {
         return TimeModeViewHolder.from(parent)

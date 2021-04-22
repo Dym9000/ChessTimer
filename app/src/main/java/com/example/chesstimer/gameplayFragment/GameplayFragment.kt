@@ -20,6 +20,7 @@ class GameplayFragment : Fragment() {
 
     @Inject
     lateinit var repository: TimeModesRepository
+
     @Inject
     lateinit var counter: CountdownChessTimer
 

@@ -1,6 +1,8 @@
 package com.example.chesstimer.displayTimeModesFragment
 
 import androidx.lifecycle.LiveData
+import com.example.chesstimer.timeModesDatabase.Player
+import com.example.chesstimer.timeModesDatabase.TimeMode
 import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
 import com.example.chesstimer.timeModesDatabase.TimeModesDAO
 
@@ -18,12 +20,12 @@ class TimeModesRepository(private val timeModesDao: TimeModesDAO) {
         return timeModesDao.getSingleTimeMode(id)
     }
 
-//    fun deleteTimeMode(timeMode:TimeMode){
-//        timeModesDao.delete(timeMode)
-//    }
+    suspend fun deleteSingleTimeModeWithPlayers(timeMode: TimeMode, players: List<Player>) {
+        timeModesDao.deleteSingleTimeModeWithPlayers(timeMode, players)
+    }
 
-//    fun clearTimeModesList{
-//        timeModesDao.clear()
-//    }
+    suspend fun clearTimeModesList() {
+        timeModesDao.clearAllData()
+    }
 
 }

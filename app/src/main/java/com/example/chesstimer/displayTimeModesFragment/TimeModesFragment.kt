@@ -1,7 +1,12 @@
 package com.example.chesstimer.displayTimeModesFragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,9 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TimeModesFragment : Fragment() {
 
+    private lateinit var adapter: TimeModesAdapter
     private val timeModesViewModel: TimeModesViewModel by viewModels()
-    lateinit var adapter: TimeModesAdapter
-    lateinit var binding: FragmentTimeModesBinding
+    private lateinit var binding: FragmentTimeModesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +44,12 @@ class TimeModesFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
         binding.timeModes.layoutManager = manager
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        setHasOptionsMenu(true)
+
         setSubscribers()
         setClickListeners()
         setItemTouchHelper()
-        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -99,16 +106,12 @@ class TimeModesFragment : Fragment() {
         itemInteractionHandler.attachToRecyclerView(binding.timeModes)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu, menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.clearAllData -> timeModesViewModel.onClearDataIconClicked()
         }
-        return true
+        ActivityCompat.recreate(requireActivity())
+        return super.onOptionsItemSelected(item)
     }
 
 }

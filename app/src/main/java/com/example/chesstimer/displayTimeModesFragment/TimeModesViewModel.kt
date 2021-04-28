@@ -41,4 +41,6 @@ class TimeModesViewModel @Inject constructor(private val repository: TimeModesRe
             repository.clearTimeModesList()
         }
     }
+
+    var myList = (1..20).toList().filter { true }
 }

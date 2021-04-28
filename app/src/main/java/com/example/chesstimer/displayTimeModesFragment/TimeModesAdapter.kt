@@ -10,7 +10,7 @@ import com.example.chesstimer.timeModesDatabase.TimeMode
 import com.example.chesstimer.timeModesDatabase.TimeModeWithPlayers
 import java.util.*
 
-class TimeModesAdapter(val clickListener: OnTimeModeClickListener) :
+class TimeModesAdapter(private val clickListener: OnTimeModeClickListener) :
     ListAdapter<TimeModeWithPlayers, TimeModesAdapter.TimeModeViewHolder>(TimeModeDiffCallback()) {
 
     fun getItemAtPosition(position: Int): TimeModeWithPlayers {

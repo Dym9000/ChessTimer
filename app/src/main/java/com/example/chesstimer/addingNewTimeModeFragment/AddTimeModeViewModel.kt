@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.chesstimer.addingNewTimeModeFragment.timeChanger.TimeChangerFactory
+import com.example.chesstimer.addingNewTimeModeFragment.timeChanger.TimeChangerTypes
 import com.example.chesstimer.displayTimeModesFragment.TimeModesRepository
 import com.example.chesstimer.utils.TimeConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,18 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class AddTimeModeViewModel @Inject constructor(
     private val repository: TimeModesRepository,
-    private val converter: TimeConverter
+    private val converter: TimeConverter,
+    private val timeChangerFactory: TimeChangerFactory
 ) : ViewModel() {
 
-    private val minValue = 0
-    private val maxHour = 99
-    private val maxMin = 59
-    private val maxSec = 50
-    private val secondInterval = 10
-    private val hourAndMinInterval = 1
-
-    private var firstPlayerTimeInSeconds: Long = 0
-    private var secondPlayerTimeInSeconds: Long = 0
+    private var firstPlayerTimeInSeconds: Long = 0L
+    private var secondPlayerTimeInSeconds: Long = 0L
 
     private var _currentTimeInSeconds = MutableLiveData<Long>()
     val currentTimeInSeconds: LiveData<Long>
@@ -61,10 +57,13 @@ class AddTimeModeViewModel @Inject constructor(
         _minutes.value = 0
         _seconds.value = 0
         _currentTimeInSeconds.value = 0L
+        val hourCalculator = timeChangerFactory.createTimeChanger(TimeChangerTypes.HOUR)
+        timeChangerFactory.createTimeChanger(TimeChangerTypes.MINUTE)
+        timeChangerFactory.createTimeChanger(TimeChangerTypes.SECOND)
     }
 
     fun onAddHourClick() {
-        add(hours, _hours, maxHour, hourAndMinInterval)
+
     }
 
     fun onSubtractHourClick() {

@@ -76,4 +76,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
+    //LEAK CANARY
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }

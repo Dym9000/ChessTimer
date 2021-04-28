@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -42,6 +43,9 @@ class GameplayFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = gameplayViewModel
         }
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        setHasOptionsMenu(false)
 
         setSubscribers()
 

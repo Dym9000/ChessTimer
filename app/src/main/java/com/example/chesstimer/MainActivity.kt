@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+        menuInflater.inflate(R.menu.menu, menu)
 
         val nightMode: Int = AppCompatDelegate.getDefaultNightMode()
         if (nightMode != AppCompatDelegate.MODE_NIGHT_YES) {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val nightMode = AppCompatDelegate.getDefaultNightMode()
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.day_night_mode ->
                 when (nightMode) {
                     AppCompatDelegate.MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(

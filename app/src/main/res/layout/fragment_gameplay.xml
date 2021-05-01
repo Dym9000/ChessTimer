@@ -25,6 +25,7 @@
             android:gravity="center"
             android:onClick="@{() -> viewModel.onPlayer1Click()}"
             android:textAppearance="?attr/textAppearanceHeadline2"
+            android:textSize="@dimen/title_size_big"
             app:currentTime="@{viewModel.timeLeftInMillisPlayer1}"
             app:layout_constraintBottom_toTopOf="@+id/swap_time_btn"
             app:layout_constraintEnd_toStartOf="@+id/textView6"
@@ -32,7 +33,7 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="00:00:00" />
+            tools:text="99:99:99" />
 
         <TextView
             android:id="@+id/textView6"
@@ -43,13 +44,14 @@
             android:gravity="center"
             android:onClick="@{() -> viewModel.onPlayer2Click()}"
             android:textAppearance="?attr/textAppearanceHeadline2"
+            android:textSize="@dimen/title_size_big"
             app:currentTime="@{viewModel.timeLeftInMillisPlayer2}"
             app:layout_constraintBottom_toTopOf="@+id/swap_time_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="00:00:00" />
+            tools:text="99:99:99" />
 
         <Button
             android:id="@+id/swap_time_btn"

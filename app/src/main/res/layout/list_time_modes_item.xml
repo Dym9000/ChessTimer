@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/player_1_title"
                 android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="@dimen/subtitle_size_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/player_2_title"
                 android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="@dimen/subtitle_size_small"
                 app:layout_constraintEnd_toEndOf="@+id/time_mode_player1_textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textStyle="bold"
+                android:textSize="@dimen/subtitle_size"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:timeMode="@{item}"

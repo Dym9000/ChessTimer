@@ -36,7 +36,7 @@ class TimeModesViewModel @Inject constructor(private val repository: TimeModesRe
         }
     }
 
-    fun onClearDataIconClicked(){
+    fun onClearDataIconClicked() {
         viewModelScope.launch {
             repository.clearTimeModesList()
         }

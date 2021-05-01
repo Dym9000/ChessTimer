@@ -17,5 +17,9 @@
     <string name="start_game_button">START</string>
     <string name="clear_data">Clear data</string>
     <string name="day_night_mode">day_night_mode</string>
-
+    <string name="clearing_all_data_dialog_title">Clearing all time modes</string>
+    <string name="clearing_all_data_dialog_text">Are you sure you want to delete all time modes?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="game_over_message">GAME OVER</string>
 </resources>

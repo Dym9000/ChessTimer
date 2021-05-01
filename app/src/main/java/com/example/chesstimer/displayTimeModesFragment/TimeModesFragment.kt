@@ -1,12 +1,10 @@
 package com.example.chesstimer.displayTimeModesFragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,6 +23,7 @@ class TimeModesFragment : Fragment() {
     private lateinit var adapter: TimeModesAdapter
     private val timeModesViewModel: TimeModesViewModel by viewModels()
     private lateinit var binding: FragmentTimeModesBinding
+    private val onClearingDataDialog: AlertDialog by lazy { setClearingDataDialog() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +47,7 @@ class TimeModesFragment : Fragment() {
         setHasOptionsMenu(true)
 
         setSubscribers()
-        setClickListeners()
+        setOnClickListeners()
         setItemTouchHelper()
 
         return binding.root
@@ -74,7 +73,20 @@ class TimeModesFragment : Fragment() {
         })
     }
 
-    private fun setClickListeners() {
+    private fun setClearingDataDialog(): AlertDialog {
+        return AlertDialog.Builder(requireContext())
+            .setTitle(R.string.clearing_all_data_dialog_title)
+            .setMessage(R.string.clearing_all_data_dialog_text)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                timeModesViewModel.onClearDataIconClicked()
+            }
+            .setNegativeButton(R.string.no) { _, _ ->
+                Toast.makeText(requireContext(), "Data not deleted", Toast.LENGTH_SHORT).show()
+            }
+            .create()
+    }
+
+    private fun setOnClickListeners() {
         binding.addTimeMode.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(TimeModesFragmentDirections.actionTimeModesFragmentToAddingTimeMode())
@@ -106,12 +118,19 @@ class TimeModesFragment : Fragment() {
         itemInteractionHandler.attachToRecyclerView(binding.timeModes)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.clearAllData -> timeModesViewModel.onClearDataIconClicked()
-        }
-        ActivityCompat.recreate(requireActivity())
-        return super.onOptionsItemSelected(item)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        timeModesViewModel.timeModes.observe(viewLifecycleOwner, {
+            if (it.isEmpty()) {
+                menu.findItem(R.id.clearAllData).isEnabled = false
+            }
+        })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.clearAllData -> onClearingDataDialog.show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

@@ -1,13 +1,13 @@
 package com.example.chesstimer.addingNewTimeModeFragment.timeChanger
 
-abstract class TimeChanger() {
+abstract class TimeChanger {
 
-    abstract val minInt:Long
-    abstract val maxInt:Long
-    abstract val timeInterval:Int
-    private var updatedTime:Long = 0L
+    abstract val minInt: Int
+    abstract val maxInt: Int
+    abstract val timeInterval: Int
+    private var updatedTime: Int = 0
 
-    fun add(currentTime:Long): Long{
+    fun add(currentTime: Int): Int {
         updatedTime = currentTime
         if (currentTime < maxInt) {
             updatedTime += timeInterval
@@ -17,7 +17,7 @@ abstract class TimeChanger() {
         return updatedTime
     }
 
-    fun subtract(currentTime:Long):Long{
+    fun subtract(currentTime: Int): Int {
         updatedTime = currentTime
         if (currentTime > minInt) {
             updatedTime -= timeInterval

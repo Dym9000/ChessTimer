@@ -1,6 +1,6 @@
 package com.example.chesstimer.hilt
 
-import com.example.chesstimer.timeModesDatabase.TimeMode
+import com.example.chesstimer.addingNewTimeModeFragment.timeChanger.TimeChangerFactory
 import com.example.chesstimer.utils.TimeConverter
 import dagger.Module
 import dagger.Provides
@@ -17,8 +17,8 @@ object ViewModelScopeModules {
     }
 
     @Provides
-    fun provideTimeMode(): TimeMode {
-        return TimeMode()
+    fun provideTimChangerFactory(): TimeChangerFactory {
+        return TimeChangerFactory()
     }
 
 }

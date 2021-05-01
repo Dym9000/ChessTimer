@@ -1,6 +1,10 @@
 package com.example.chesstimer.gameplayFragment
 
+import android.content.Context.VIBRATOR_SERVICE
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +48,6 @@ class GameplayFragment : Fragment() {
             viewModel = gameplayViewModel
         }
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         setHasOptionsMenu(false)
 
         setSubscribers()
@@ -52,14 +55,33 @@ class GameplayFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+    }
+
     private fun setSubscribers() {
         gameplayViewModel.timeLeftInMillisPlayer1.observe(viewLifecycleOwner, {
             gameplayViewModel.onTime1Changed(it)
+            if(it == 0L){
+                    onGameOver()
+                }
         })
 
         gameplayViewModel.timeLeftInMillisPlayer2.observe(viewLifecycleOwner, {
             gameplayViewModel.onTime2Changed(it)
+            if(it == 0L){
+                onGameOver()
+            }
         })
     }
 
+    private fun onGameOver(){
+        if (Build.VERSION.SDK_INT >= 26) {
+            (context?.getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(
+                VibrationEffect.createOneShot(2000, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            (context?.getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(2000)
+        }
+    }
 }

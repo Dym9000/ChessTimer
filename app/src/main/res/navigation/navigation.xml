@@ -24,7 +24,9 @@
         tools:layout="@layout/fragment_adding_time_mode">
         <action
             android:id="@+id/action_addingTimeMode_to_timeModesFragment"
-            app:destination="@id/timeModesFragment" />
+            app:destination="@id/timeModesFragment"
+            app:popUpTo="@id/timeModesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/gameplayFragment"

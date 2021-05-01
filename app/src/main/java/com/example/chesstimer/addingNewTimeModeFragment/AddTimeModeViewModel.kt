@@ -19,8 +19,12 @@ class AddTimeModeViewModel @Inject constructor(
     private val timeChangerFactory: TimeChangerFactory
 ) : ViewModel() {
 
-    private var firstPlayerTimeInSeconds: Long = 0L
-    private var secondPlayerTimeInSeconds: Long = 0L
+    private var firstPlayerTimeInSeconds: Long? = 0L
+    private var secondPlayerTimeInSeconds: Long? = 0L
+
+    private val hourChanger = timeChangerFactory.createTimeChanger(TimeChangerTypes.HOUR)
+    private val minuteChanger = timeChangerFactory.createTimeChanger(TimeChangerTypes.MINUTE)
+    private val secondChanger = timeChangerFactory.createTimeChanger(TimeChangerTypes.SECOND)
 
     private var _currentTimeInSeconds = MutableLiveData<Long>()
     val currentTimeInSeconds: LiveData<Long>
@@ -57,79 +61,57 @@ class AddTimeModeViewModel @Inject constructor(
         _minutes.value = 0
         _seconds.value = 0
         _currentTimeInSeconds.value = 0L
-        val hourCalculator = timeChangerFactory.createTimeChanger(TimeChangerTypes.HOUR)
-        timeChangerFactory.createTimeChanger(TimeChangerTypes.MINUTE)
-        timeChangerFactory.createTimeChanger(TimeChangerTypes.SECOND)
     }
 
     fun onAddHourClick() {
-
+        _hours.value = hours.value?.let { hourChanger?.add(it) }
+        convert()
     }
 
     fun onSubtractHourClick() {
-        subtract(hours, _hours, maxHour, hourAndMinInterval)
+        _hours.value = hours.value?.let { hourChanger?.subtract(it) }
+        convert()
     }
 
     fun onAddMinuteClick() {
-        add(minutes, _minutes, maxMin, hourAndMinInterval)
+        _minutes.value = minutes.value?.let { minuteChanger?.add(it) }
+        convert()
     }
 
     fun onSubtractMinuteClick() {
-        subtract(minutes, _minutes, maxMin, hourAndMinInterval)
+        _minutes.value = minutes.value?.let { minuteChanger?.subtract(it) }
+        convert()
     }
 
     fun onAddSecondClick() {
-        add(seconds, _seconds, maxSec, secondInterval)
+        _seconds.value = seconds.value?.let { secondChanger?.add(it) }
+        convert()
     }
 
     fun onSubtractSecondClick() {
-        subtract(seconds, _seconds, maxSec, secondInterval)
+        _seconds.value = seconds.value?.let { secondChanger?.subtract(it) }
+        convert()
     }
 
-    private fun subtract(
-        currentTime: LiveData<Int>,
-        _varName: MutableLiveData<Int>,
-        max: Int,
-        interval: Int
-    ) {
-        if (currentTime.value!! > minValue) {
-            _varName.value = _varName.value!!.minus(interval)
-        } else {
-            _varName.value = max
-        }
+    private fun convert() {
         _currentTimeInSeconds.value =
-            converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
-    }
-
-    private fun add(
-        currentTime: LiveData<Int>,
-        _varName: MutableLiveData<Int>,
-        max: Int,
-        interval: Int
-    ) {
-        if (currentTime.value!! < max) {
-            _varName.value = _varName.value!!.plus(interval)
-        } else {
-            _varName.value = minValue
-        }
-        _currentTimeInSeconds.value =
-            converter.convert(hours.value!!, minutes.value!!, seconds.value!!)
+            converter.convert(_hours.value, _minutes.value, _seconds.value)
     }
 
     fun onNextPlayerClick() {
         if (navigatedToSecondPlayer.value != true) {
-            firstPlayerTimeInSeconds = currentTimeInSeconds.value!!
+            firstPlayerTimeInSeconds = currentTimeInSeconds.value
             _navigatedToSecondPlayer.value = true
         } else {
-            secondPlayerTimeInSeconds = currentTimeInSeconds.value!!
+            secondPlayerTimeInSeconds = currentTimeInSeconds.value
             val times = mutableListOf<Long>()
-            times.add(firstPlayerTimeInSeconds)
-            times.add(secondPlayerTimeInSeconds)
+            firstPlayerTimeInSeconds?.let { times.add(it) }
+            secondPlayerTimeInSeconds?.let { times.add(it) }
 
             viewModelScope.launch {
                 repository.insertTimeModesAndPlayers(times)
+                _navigatedToSecondPlayer.value = false
             }
-            _navigatedToSecondPlayer.value = false
         }
     }
 

@@ -6,7 +6,7 @@ buildscript {
     ext.work_manager_version = "2.5.0"
     ext.coroutine_version = "1.4.3"
     ext.room_version = "2.3.0"
-    ext.gradle_version = '4.1.3'
+    ext.gradle_version = '4.2.0'
     ext.dataBindingCompilerVersion = gradle_version
     repositories {
         google()
